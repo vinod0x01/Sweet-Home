@@ -1,0 +1,1 @@
+curl --location 'localhost:8083/transaction/2'

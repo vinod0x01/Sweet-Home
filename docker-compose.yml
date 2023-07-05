@@ -1,0 +1,67 @@
+version: '3.3'
+
+services:
+
+  eurekaservice:
+    # build: eurekaServer
+    container_name: eureka-server
+    image: vinod2357/eurekaserver:1.0.1
+    ports:
+    - "8761:8761"
+    networks:
+      - "microservicesnet"
+    hostname: eureka-service
+
+  notificationservice:
+    # build: notificationservice
+    container_name: notification-service
+    image: vinod2357/notificationservice:1.0.1
+    environment:
+      KAFKA_HOST: "107.20.58.139"
+      KAFKA_HOST_PORT: "9092"
+    networks:
+      - "microservicesnet"
+    hostname: notification-service
+  
+  bookingservice:
+    # build: bookingService
+    container_name: booking-service
+    image: vinod2357/bookingservice:1.0.1
+    ports:
+    - "8080:8080"
+    networks:
+      - "microservicesnet"
+    environment:
+      MYSQL_HOST: "sweethome.cb9zqnw5buxr.us-east-1.rds.amazonaws.com"
+      MYSQL_HOST_PORT: 3306
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: upgrad123
+      KAFKA_HOST: "107.20.58.139"
+      KAFKA_HOST_PORT: "9092"
+    depends_on:
+      - eurekaservice
+    hostname: booking-service
+
+  paymentservice:
+    # build: paymentService
+    container_name: payment-service
+    image: vinod2357/paymentservice:1.0.1
+    ports:
+    - "8083:8083"
+    networks:
+      - "microservicesnet"
+    environment:
+      MYSQL_HOST: "sweethome.cb9zqnw5buxr.us-east-1.rds.amazonaws.com"
+      MYSQL_HOST_PORT: 3306
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: upgrad123
+      KAFKA_HOST: "107.20.58.139"
+      KAFKA_HOST_PORT: "9092"
+    depends_on:
+      - eurekaservice
+    hostname: payment-service
+
+networks:
+  microservicesnet:
+    driver: bridge
+
