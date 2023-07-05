@@ -3,9 +3,9 @@ version: '3.3'
 services:
 
   eurekaservice:
-    # build: eurekaServer
+    build: eurekaserver
     container_name: eureka-server
-    image: vinod2357/eurekaserver:1.0.1
+    image: sweet-home/eurekaserver:1.0.1
     ports:
     - "8761:8761"
     networks:
@@ -13,9 +13,9 @@ services:
     hostname: eureka-service
 
   notificationservice:
-    # build: notificationservice
+    build: notificationservice
     container_name: notification-service
-    image: vinod2357/notificationservice:1.0.1
+    image: sweet-home/notificationservice:1.0.1
     environment:
       KAFKA_HOST: "107.20.58.139"
       KAFKA_HOST_PORT: "9092"
@@ -24,9 +24,9 @@ services:
     hostname: notification-service
   
   bookingservice:
-    # build: bookingService
+    build: bookingservice
     container_name: booking-service
-    image: vinod2357/bookingservice:1.0.1
+    image: sweet-home/bookingservice:1.0.1
     ports:
     - "8080:8080"
     networks:
@@ -43,9 +43,9 @@ services:
     hostname: booking-service
 
   paymentservice:
-    # build: paymentService
+    build: paymentservice
     container_name: payment-service
-    image: vinod2357/paymentservice:1.0.1
+    image: sweet-home/paymentservice:1.0.1
     ports:
     - "8083:8083"
     networks:
