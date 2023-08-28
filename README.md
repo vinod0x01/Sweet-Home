@@ -19,3 +19,6 @@
 ## Architecture
 
 ![Alt text](./images/architecture_1.png)
+
+### more details at
+[CodeLogic.pdf](./CodeLogic.pdf)
